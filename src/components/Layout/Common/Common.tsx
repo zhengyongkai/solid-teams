@@ -1,3 +1,4 @@
+import LeftBar from '../LeftBar/LeftBar'
 import Navbar from '../Navbar/Navbar'
 
 interface CommonProps {
@@ -10,7 +11,12 @@ export default function Common(props: CommonProps) {
       <div>
         <Navbar />
       </div>
-      <div>{props.children}</div>
+      <div class="flex">
+        <div>
+          <LeftBar></LeftBar>
+        </div>
+        <div>{props.children}</div>
+      </div>
     </>
   )
 }

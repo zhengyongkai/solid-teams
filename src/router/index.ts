@@ -8,6 +8,10 @@ export default [
       {
         path: '/chat',
         component: lazy(() => import('@/page/chat/chat'))
+      },
+      {
+        path: '/notice',
+        component: lazy(() => import('@/page/notice/notice'))
       }
     ]
   }
