@@ -1,8 +1,13 @@
 import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
-import { useNavigate } from '@solidjs/router'
+import useLang from '@/hook/useLang'
 
-export default function LeftBar() {
-  const navigate = useNavigate()
+interface LeftBarInf {
+  onClick: (type: string) => void
+}
+
+export default function LeftBar(props: LeftBarInf) {
+  const { onClick } = props
+  const { t, setLocale } = useLang()
   const barItems = [
     {
       path: '/notice',
@@ -11,13 +16,23 @@ export default function LeftBar() {
     },
     {
       path: '/chat',
-      icon: 'teams',
+      icon: 'chat',
       name: '聊天'
+    },
+    {
+      path: '/teams',
+      icon: 'teams',
+      name: '团队'
     },
     {
       path: '/calendar',
       icon: 'calendar',
-      name: '团队'
+      name: '日历'
+    },
+    {
+      path: '/tel',
+      icon: 'tel',
+      name: '通话'
     }
   ]
 
@@ -27,8 +42,9 @@ export default function LeftBar() {
         return (
           <div
             class="h-56 text-center flex flex-col items-center"
-            onClick={() => {
-              navigate(item.path)
+            onclick={() => {
+              onClick(item.path)
+              setLocale('en')
             }}
           >
             <SvgIcon className="m-auto" name={item.icon} size={24}></SvgIcon>

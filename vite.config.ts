@@ -1,13 +1,15 @@
 import { defineConfig } from 'vite'
 import solid from 'vite-plugin-solid'
 import UnoCSS from 'unocss/vite'
+import { presetUno } from 'unocss'
+import { presetDaisy } from 'unocss-preset-daisy'
 import path from 'path'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 export default defineConfig({
   plugins: [
     UnoCSS({
-      /* options */
+      presets: [presetUno(), presetDaisy()]
     }),
     solid(),
     createSvgIconsPlugin({
