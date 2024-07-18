@@ -1,8 +1,11 @@
 import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
 import Avatar from '@/assets/img/avatar.png'
 import SearchBar from '@/components/Common/Search'
+import { useNavigate } from '@solidjs/router'
 
 export default function Navbar() {
+  const navigator = useNavigate()
+
   return (
     <div class="h-48px flex items-center bg-cnb5 border-b-1 border-cnsal">
       <div class="w-64px text-center">
@@ -23,7 +26,11 @@ export default function Navbar() {
           tabIndex={0}
           class="menu dropdown-content bg-base-100 rounded-box z-[1] w-200 p-2 shadow"
         >
-          <li>
+          <li
+            onClick={() => {
+              navigator('/setting')
+            }}
+          >
             <a>设置</a>
           </li>
           <li>
@@ -31,7 +38,6 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
-
       <div class="w-50 text-center relative">
         <img class="w-32 h-32 m-auto rounded-full" src={Avatar} alt="" />
         <div class="absolute right-10 top-16">
