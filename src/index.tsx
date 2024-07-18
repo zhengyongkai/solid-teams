@@ -1,21 +1,25 @@
 /* @refresh reload */
-import { render } from 'solid-js/web'
+import { render, Suspense } from 'solid-js/web'
 import { Router } from '@solidjs/router'
 import route from '@/router'
-import { KeepAliveProvider } from 'solid-keep-alive'
+import { StoreProvider } from './store'
 
 import '@unocss/reset/tailwind.css'
 import 'virtual:svg-icons-register'
 import 'virtual:uno.css'
 import './index.css'
 
+import StartPage from './page/start/start'
+
 const root = document.getElementById('root')
 
 render(
   () => (
-    <Router>
-      <KeepAliveProvider>{route}</KeepAliveProvider>
-    </Router>
+    <Suspense fallback={<StartPage></StartPage>}>
+      <StoreProvider>
+        <Router>{route}</Router>
+      </StoreProvider>
+    </Suspense>
   ),
   root!
 )

@@ -5,13 +5,15 @@ export interface userInf {
   username: string
 }
 
+export type setUserDataInf = (payload: userInf) => void
+
 export default function userStore() {
   const [user, setUser] = createSignal<userInf>({
-    avatar: '',
-    username: ''
+    avatar: '3123',
+    username: '4234'
   })
 
-  async function setUserData(payload: userInf) {
+  const setUserData: setUserDataInf = async (payload: userInf) => {
     setUser(payload)
   }
 

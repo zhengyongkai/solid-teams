@@ -11,6 +11,7 @@ import {
 } from 'unocss'
 import transformerAttributifyJsx from '@unocss/transformer-attributify-jsx'
 import presetRemToPx from '@unocss/preset-rem-to-px'
+import common from './theme/common'
 
 export default defineConfig({
   content: {
@@ -25,11 +26,12 @@ export default defineConfig({
       // exclude: []
     }
   },
+  theme: {
+    ...common
+  },
   shortcuts: [
     // ...
   ],
-  theme: {},
-
   presets: [
     presetIcons({
       /* options */

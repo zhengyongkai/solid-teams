@@ -1,16 +1,19 @@
 import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
 import Avatar from '@/assets/img/avatar.png'
+import SearchBar from '@/components/Common/Search'
 
 export default function Navbar() {
   return (
-    <div class="h-48px flex items-center">
+    <div class="h-48px flex items-center bg-cnb5 border-b-1 border-cnsal">
       <div class="w-64px text-center">
         <SvgIcon name="more" className="m-auto"></SvgIcon>
       </div>
       <div>
         <SvgIcon name="logo" size={24}></SvgIcon>
       </div>
-      <div class="justify-center flex-1 flex justify-center">dasd</div>
+      <div class="justify-center  flex-1 flex justify-center">
+        <SearchBar></SearchBar>
+      </div>
 
       <div class="dropdown dropdown-end">
         <div tabIndex={0} class="btn btn-square w-32 h-32 min-h-32">

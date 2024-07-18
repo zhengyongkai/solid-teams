@@ -8,3 +8,10 @@ body,html {
   padding: 0;
   overflow: hidden;
 }
+
+
+:root {
+  --colorNeutralBackground5:#ebebeb;
+  --colorNeutralShadowAmbientLighter: rgba(0,0,0,0.0);
+  --colorNeutralForeground3BrandSelected: #5b5fc7;
+}
