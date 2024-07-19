@@ -23,7 +23,6 @@ export const langContext = createContext<langContext>()
 
 export async function fetchDictionary(locale: Locale): Promise<i18n.BaseRecordDict> {
   const dict = await import(`./i18n/${locale}/${locale}.ts`)
-  console.log('dasd', dict.default)
   return i18n.flatten(dict.default) // flatten the dictionary to make all nested keys available top-level
 }
 

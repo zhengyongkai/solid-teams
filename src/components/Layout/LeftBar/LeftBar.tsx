@@ -65,9 +65,7 @@ export default function LeftBar(props: LeftBarInf) {
               }}
             >
               <SvgIcon className="m-auto" name={item.icon} size={24}></SvgIcon>
-              <div class="text-10">
-                {item.name} {t('chat', 'activity')}
-              </div>
+              <div class="text-10">{item.name}</div>
             </div>
           )
         })}
