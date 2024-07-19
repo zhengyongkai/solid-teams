@@ -1,10 +1,14 @@
-import { createSignal, Match, Switch } from 'solid-js'
+import { createSignal, JSX, Match, Switch } from 'solid-js'
 import ChatPage from '@/page/chat/chat'
 import NoticePage from '@/page/notice/notice'
 
 import LeftBar from '../LeftBar/LeftBar'
 
-export default function TabPanel() {
+interface TabPanelPropsInf {
+  children: JSX.Element
+}
+
+export default function TabPanel(props: TabPanelPropsInf) {
   const [sign, setSignal] = createSignal('/notice')
   return (
     <>
@@ -15,14 +19,7 @@ export default function TabPanel() {
         {/* {Object.entries(componentMap).map((item) => {
             return <div class={item[0] === sign() ? 'block' : 'hidden'}>{item[1]}</div>
           })} */}
-        <Switch>
-          <Match when={sign() === '/notice'}>
-            <NoticePage />
-          </Match>
-          <Match when={sign() === '/chat'}>
-            <ChatPage />
-          </Match>
-        </Switch>
+        {props.children}
       </div>
     </>
   )

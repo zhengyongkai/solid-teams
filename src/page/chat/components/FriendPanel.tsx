@@ -5,10 +5,11 @@ import Avatar from '@/assets/img/avatar.png'
 interface FriendPanelInf {
   children: JSX.Element
   title: string
+  defaultOpen: boolean
 }
 
 export default function FriendPanel(props: FriendPanelInf) {
-  const [isContractions, setisContractions] = createSignal(true)
+  const [isContractions, setisContractions] = createSignal(!props.defaultOpen)
 
   return (
     <>

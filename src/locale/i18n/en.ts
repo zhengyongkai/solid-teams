@@ -1,3 +1,3 @@
 export default {
-  hello: 'hello'
+  activity: 'Activity'
 }

@@ -16,10 +16,10 @@ export default function ChatLeftBar() {
         </div>
       </div>
       <div class="h-screenb flex-1">
-        <FriendPanel title="已固定">
+        <FriendPanel title="已固定" defaultOpen={false}>
           <ChatItems></ChatItems>
         </FriendPanel>
-        <FriendPanel title="最近">
+        <FriendPanel title="最近" defaultOpen={true}>
           <ChatItems></ChatItems>
           <ChatItems></ChatItems>
 

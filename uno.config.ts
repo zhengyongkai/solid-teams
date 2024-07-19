@@ -13,6 +13,8 @@ import transformerAttributifyJsx from '@unocss/transformer-attributify-jsx'
 import presetRemToPx from '@unocss/preset-rem-to-px'
 import common from './theme/common'
 
+console.log(common)
+
 export default defineConfig({
   content: {
     pipeline: {

@@ -2,9 +2,11 @@ import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
 import Avatar from '@/assets/img/avatar.png'
 import SearchBar from '@/components/Common/Search'
 import { useNavigate } from '@solidjs/router'
+import useLang from '@/hook/useLang'
 
 export default function Navbar() {
   const navigator = useNavigate()
+  const { t } = useLang()
 
   return (
     <div class="h-48px flex items-center bg-cnb5 border-b-1 border-cnsal">
@@ -15,7 +17,7 @@ export default function Navbar() {
         <SvgIcon name="logo" size={24}></SvgIcon>
       </div>
       <div class="justify-center  flex-1 flex justify-center">
-        <SearchBar></SearchBar>
+        <SearchBar></SearchBar> {t('activity')}
       </div>
 
       <div class="dropdown dropdown-end">
@@ -28,7 +30,7 @@ export default function Navbar() {
         >
           <li
             onClick={() => {
-              navigator('/setting')
+              navigator('/common/setting')
             }}
           >
             <a>设置</a>

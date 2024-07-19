@@ -14,14 +14,18 @@ export default [
             component: lazy(() => import('@/page/chat/chat'))
           },
           {
+            path: '/teams',
+            component: lazy(() => import('@/page/notice/notice'))
+          },
+          {
             path: '/notice',
             component: lazy(() => import('@/page/notice/notice'))
+          },
+          {
+            path: '/setting',
+            component: lazy(() => import('@/page/setting/setting'))
           }
         ]
-      },
-      {
-        path: '/setting',
-        component: lazy(() => import('@/page/setting/setting'))
       }
     ]
   }

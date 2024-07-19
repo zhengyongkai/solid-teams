@@ -1,5 +1,3 @@
-import { ProviderInf, storeContext } from '@/store'
-import { useContext } from 'solid-js'
 import ChatLeftBar from './components/ChatLeftBar'
 import ChatPanel from './components/ChatPanel'
 

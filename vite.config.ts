@@ -19,6 +19,9 @@ export default defineConfig({
       symbolId: 'icon-[dir]-[name]'
     })
   ],
+  server: {
+    host: '0.0.0.0'
+  },
   resolve: {
     alias: {
       // 这里就是需要配置resolve里的别名
