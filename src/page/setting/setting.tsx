@@ -1,10 +1,12 @@
 import TitlePanel from '@/components/Common/TitlePanel/TitlePanel'
 import RadioGroup, { Radio } from '@/components/Form/RadioGroup/RadioGroup'
 import useLang from '@/hook/useLang'
+import useStore from '@/hook/useStore'
 import { Locale, localeDict } from '@/locale'
 
 export default function SettingPage() {
-  const { setLocale } = useLang()
+  const { setLang } = useLang()
+  const { lang } = useStore()
   return (
     <>
       <div>
@@ -16,12 +18,12 @@ export default function SettingPage() {
           <h3 class="text-16 font-700 my-16 mb-24">语言设置</h3>
           <div>
             <RadioGroup
-              defaultValue={'cn'}
+              defaultValue={lang()}
               name="radio"
               className=" radio-sm"
               size={'large'}
               onChange={(e) => {
-                setLocale(e as Locale)
+                setLang(e as Locale)
               }}
             >
               {Object.entries(localeDict).map((item) => {

@@ -7,7 +7,7 @@ export interface userInf {
 
 export type setUserDataInf = (payload: userInf) => void
 
-export default function userStore() {
+export default function useUserStore() {
   const [user, setUser] = createSignal<userInf>({
     avatar: '3123',
     username: '4234'

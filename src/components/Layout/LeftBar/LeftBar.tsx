@@ -1,4 +1,5 @@
 import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
+import useLang from '@/hook/useLang'
 import { useLocation, useNavigate } from '@solidjs/router'
 import { createMemo, createSignal, Show } from 'solid-js'
 
@@ -36,6 +37,7 @@ export default function LeftBar(props: LeftBarInf) {
   ]
   const location = useLocation()
   const navigator = useNavigate()
+  const { t } = useLang()
 
   const routeParams = createMemo(() => {
     let index = barItems.findIndex((item) => item.path === location.pathname)
@@ -63,7 +65,9 @@ export default function LeftBar(props: LeftBarInf) {
               }}
             >
               <SvgIcon className="m-auto" name={item.icon} size={24}></SvgIcon>
-              <div class="text-10">{item.name}</div>
+              <div class="text-10">
+                {item.name} {t('chat', 'activity')}
+              </div>
             </div>
           )
         })}

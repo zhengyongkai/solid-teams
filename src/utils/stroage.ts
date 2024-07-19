@@ -7,7 +7,7 @@ const Prefix = 'teams-'
  * @param {boolean} parse 是否需要parse
  * @return {*}
  */
-export function getStorage(key: string, parse: boolean): string {
+export function getStorage(key: string, parse?: boolean): string {
   const value = storage.getItem(Prefix + key)
   return parse ? JSON.parse(value || '{}') : value
 }
@@ -19,6 +19,6 @@ export function getStorage(key: string, parse: boolean): string {
  * @param {boolean} stringify 是否需要格式化
  * @return {*}
  */
-export function setStorage(key: string, value: string, stringify: boolean): void {
+export function setStorage(key: string, value: string, stringify?: boolean): void {
   return storage.setItem(Prefix + key, stringify ? JSON.stringify(value) : value)
 }

@@ -10,6 +10,7 @@ import 'virtual:uno.css'
 import './index.css'
 
 import StartPage from './page/start/start'
+import LangProvider from './locale'
 
 const root = document.getElementById('root')
 
@@ -17,7 +18,9 @@ render(
   () => (
     <Suspense fallback={<StartPage></StartPage>}>
       <StoreProvider>
-        <Router>{route}</Router>
+        <LangProvider>
+          <Router>{route}</Router>
+        </LangProvider>
       </StoreProvider>
     </Suspense>
   ),

@@ -1,15 +1,18 @@
-import { createMemo, createResource, createSignal } from 'solid-js'
+import { createResource, createSignal, useContext } from 'solid-js'
 import * as i18n from '@solid-primitives/i18n'
-import { fetchDictionary, Locale } from '@/locale'
+import { fetchDictionary, langContext, Locale } from '@/locale'
+import useStore from './useStore'
 
 export default function useLang() {
-  const [locale, setLocale] = createSignal<Locale>('cn')
-  const [dict] = createResource(locale, fetchDictionary)
-  const t = i18n.translator(dict)
+  const context = useContext(langContext)!!
+
+  function t(module: string, type: string) {
+    const getLang = i18n.scopedTranslator(context.t, module)
+    return getLang(type)
+  }
 
   return {
-    locale,
-    setLocale,
+    ...context,
     t
   }
 }
