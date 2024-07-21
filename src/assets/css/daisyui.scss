@@ -1,0 +1,6 @@
+// 头像在线状态
+.avatar.online:before,
+.avatar.offline:before {
+  top: inherit !important;
+  bottom: 7%;
+}

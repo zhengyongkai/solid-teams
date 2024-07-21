@@ -1,15 +1,15 @@
-import { createSignal, JSX, Match, Switch } from 'solid-js'
-import ChatPage from '@/page/chat/chat'
-import NoticePage from '@/page/notice/notice'
+import { createSignal, JSX, Match, Switch } from 'solid-js';
+import ChatPage from '@/page/chat/chat';
+import NoticePage from '@/page/notice/notice';
 
-import LeftBar from '../LeftBar/LeftBar'
+import LeftBar from '../LeftBar/LeftBar';
 
 interface TabPanelPropsInf {
-  children: JSX.Element
+  children: JSX.Element;
 }
 
 export default function TabPanel(props: TabPanelPropsInf) {
-  const [sign, setSignal] = createSignal('/notice')
+  const [sign, setSignal] = createSignal('/notice');
   return (
     <>
       <div>
@@ -22,5 +22,5 @@ export default function TabPanel(props: TabPanelPropsInf) {
         {props.children}
       </div>
     </>
-  )
+  );
 }

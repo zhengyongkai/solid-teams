@@ -1,18 +1,21 @@
 /* @refresh reload */
-import { render, Suspense } from 'solid-js/web'
-import { Router } from '@solidjs/router'
-import route from '@/router'
-import { StoreProvider } from './store'
+import { render, Suspense } from 'solid-js/web';
+import { Router } from '@solidjs/router';
+import route from '@/router';
 
-import '@unocss/reset/tailwind.css'
-import 'virtual:svg-icons-register'
-import 'virtual:uno.css'
-import './index.css'
+import '@unocss/reset/tailwind.css';
+import '@/assets/css/common.scss';
+import '@/assets/css/theme.scss';
+import '@/assets/css/daisyui.scss';
 
-import StartPage from './page/start/start'
-import LangProvider from './locale'
+import 'virtual:svg-icons-register';
+import 'virtual:uno.css';
 
-const root = document.getElementById('root')
+import { StoreProvider } from './store';
+import StartPage from './page/start/start';
+import LangProvider from './locale';
+
+const root = document.getElementById('root');
 
 render(
   () => (
@@ -25,4 +28,4 @@ render(
     </Suspense>
   ),
   root!
-)
+);

@@ -1,10 +1,10 @@
-import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
-import Avatar from '@/assets/img/avatar.png'
-import SearchBar from '@/components/Common/Search'
-import { useNavigate } from '@solidjs/router'
+import SvgIcon from '@/components/Common/SvgIcon/SvgIcon';
+import Avatar from '@/assets/img/avatar.png';
+import SearchBar from '@/components/Common/Search';
+import { useNavigate } from '@solidjs/router';
 
 export default function Navbar() {
-  const navigator = useNavigate()
+  const navigator = useNavigate();
 
   return (
     <div class="h-48px flex items-center bg-cnb5 border-b-1 border-cnsal">
@@ -14,8 +14,8 @@ export default function Navbar() {
       <div>
         <SvgIcon name="logo" size={24}></SvgIcon>
       </div>
-      <div class="justify-center  flex-1 flex justify-center">
-        <SearchBar></SearchBar>
+      <div class="justify-center  flex-1 flex justify-center ">
+        <SearchBar className="max-lg:hidden"></SearchBar>
       </div>
 
       <div class="dropdown dropdown-end">
@@ -28,7 +28,7 @@ export default function Navbar() {
         >
           <li
             onClick={() => {
-              navigator('/common/setting')
+              navigator('/common/setting');
             }}
           >
             <a>设置</a>
@@ -38,12 +38,11 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
-      <div class="w-50 text-center relative">
-        <img class="w-32 h-32 m-auto rounded-full" src={Avatar} alt="" />
-        <div class="absolute right-10 top-16">
-          <SvgIcon name="online" size={10}></SvgIcon>
+      <div class="w-50   text-center relative ">
+        <div class="w-32 h-32 avatar online">
+          <img class="w-32 h-32  m-auto rounded-full " src={Avatar} alt="" />
         </div>
       </div>
     </div>
-  )
+  );
 }

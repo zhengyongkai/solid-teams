@@ -14,6 +14,7 @@
     "@solidjs/router": "^0.14.1",
     "@stitches/core": "^1.2.8",
     "@unocss/preset-rem-to-px": "^0.61.3",
+    "@unocss/reset": "^0.61.5",
     "solid-js": "^1.8.17",
     "solid-keep-alive": "^0.2.3",
     "solid-transition-group": "^0.0.10",
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@types/node": "^20.14.10",
     "daisyui": "3.9.4",
+    "sass": "^1.77.8",
     "typescript": "^5.2.2",
     "unocss": "^0.61.3",
     "vite": "^5.3.1",
