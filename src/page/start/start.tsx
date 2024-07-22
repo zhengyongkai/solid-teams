@@ -8,5 +8,5 @@ export default function StartPage() {
 
       <div class="text-center font-14 mt-8">加载中 请稍后</div>
     </div>
-  )
+  );
 }

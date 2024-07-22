@@ -13,6 +13,7 @@
     "@solid-primitives/i18n": "^2.1.1",
     "@solidjs/router": "^0.14.1",
     "@stitches/core": "^1.2.8",
+    "@thisbeyond/solid-dnd": "^0.7.5",
     "@unocss/preset-rem-to-px": "^0.61.3",
     "@unocss/reset": "^0.61.5",
     "solid-js": "^1.8.17",
