@@ -31,7 +31,7 @@ export default function LangProvider(props: LangProviderInf) {
   console.log(context)
   const [locale, setLocale] = createSignal<Locale>(context.lang() || 'zh-Cn')
   const [dict] = createResource(locale, fetchDictionary)
-  const t = i18n.translator(dict)
+  const t = i18n.translator(dict, i18n.resolveTemplate)
 
   function setLang(lang: Locale) {
     setLocale(lang)

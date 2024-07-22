@@ -1,12 +1,13 @@
 import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
-import Avatar from '@/assets/img/avatar.png'
+import AvatarImg from '@/assets/img/avatar.png'
+import Avatar from '@/components/Common/Avatar/Avatar'
 
 export default function ChatPanel() {
   return (
     <div class="flex flex-col h-full ">
       <div class="h-61 flex items-center px-16 border-b-1 border-cnss">
-        <div class="font-700 text-18 flex-1 flex items-center">
-          <img class="w-32 h-32  rounded-full mr-10" src={Avatar} alt="" />
+        <div class="font-700 text-18 flex-1 flex items-center  ">
+          <Avatar src={AvatarImg} className="mr-10"></Avatar>
           郑永楷
         </div>
         <div>

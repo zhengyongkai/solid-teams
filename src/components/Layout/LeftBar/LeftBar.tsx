@@ -8,6 +8,7 @@ interface LeftBarInf {
 }
 
 export default function LeftBar(props: LeftBarInf) {
+  const { t } = useLang()
   const barItems = [
     {
       path: '/common/notice',
@@ -37,7 +38,6 @@ export default function LeftBar(props: LeftBarInf) {
   ]
   const location = useLocation()
   const navigator = useNavigate()
-  const { t } = useLang()
 
   const routeParams = createMemo(() => {
     let index = barItems.findIndex((item) => item.path === location.pathname)

@@ -1,6 +1,7 @@
 import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
 import { createSignal, JSX, Show } from 'solid-js'
-import Avatar from '@/assets/img/avatar.png'
+import AvatarImg from '@/assets/img/avatar.png'
+import Avatar from '@/components/Common/Avatar/Avatar'
 
 interface FriendPanelInf {
   children: JSX.Element
@@ -37,9 +38,9 @@ export function ChatItems() {
   return (
     <div class="bg-white h-49 flex py-6 items-center">
       <div class="w-4 h-4 mx-6 border-1 border-black rounded-full bg-black"></div>
-      <div class="mr-12">
-        <img class="w-32 h-32 m-auto rounded-full" src={Avatar} alt="" />
-      </div>
+
+      <Avatar src={AvatarImg} online className="mr-12"></Avatar>
+
       <div class="flex-1 mr-16">
         <div class="flex">
           <div class="flex-1 text-14 font-700 h-20">郑永楷</div>

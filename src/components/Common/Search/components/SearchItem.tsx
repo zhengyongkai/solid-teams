@@ -1,13 +1,13 @@
-import Avatar from '@/assets/img/avatar.png';
+import AvatarImg from '@/assets/img/avatar.png'
+import Avatar from '../../Avatar/Avatar'
 
 export default function SearchItem() {
   return (
     <>
       <div role="option" class="px-16 pt-7 pb-5 hover:bg-cnb1 cursor-pointer">
         <div class="flex items-center ">
-          <div>
-            <img src={Avatar} alt="" class="w-32 h-32 rounded-full" />
-          </div>
+          <Avatar online src={AvatarImg}></Avatar>
+
           <div class="ml-10 text-cnf2h">
             <div class="text-14 ">Kevin</div>
             <div class="text-12">Kevin.foxconn.com</div>
@@ -15,5 +15,5 @@ export default function SearchItem() {
         </div>
       </div>
     </>
-  );
+  )
 }

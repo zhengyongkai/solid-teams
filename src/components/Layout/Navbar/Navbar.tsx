@@ -1,10 +1,11 @@
-import SvgIcon from '@/components/Common/SvgIcon/SvgIcon';
-import Avatar from '@/assets/img/avatar.png';
-import SearchBar from '@/components/Common/Search';
-import { useNavigate } from '@solidjs/router';
+import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
+import AvatarImg from '@/assets/img/avatar.png'
+import SearchBar from '@/components/Common/Search'
+import { useNavigate } from '@solidjs/router'
+import Avatar from '@/components/Common/Avatar/Avatar'
 
 export default function Navbar() {
-  const navigator = useNavigate();
+  const navigator = useNavigate()
 
   return (
     <div class="h-48px flex items-center bg-cnb5 border-b-1 border-cnsal">
@@ -28,7 +29,7 @@ export default function Navbar() {
         >
           <li
             onClick={() => {
-              navigator('/common/setting');
+              navigator('/common/setting')
             }}
           >
             <a>设置</a>
@@ -39,10 +40,8 @@ export default function Navbar() {
         </ul>
       </div>
       <div class="w-50   text-center relative ">
-        <div class="w-32 h-32 avatar online">
-          <img class="w-32 h-32  m-auto rounded-full " src={Avatar} alt="" />
-        </div>
+        <Avatar src={AvatarImg}></Avatar>
       </div>
     </div>
-  );
+  )
 }
