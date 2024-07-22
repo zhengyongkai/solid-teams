@@ -3,6 +3,16 @@ import { createContext, JSX, useContext } from 'solid-js'
 
 type size = 'large' | 'small' | 'middle'
 
+interface RadioGroupPropsInf {
+  defaultValue?: number | string
+  className?: string
+  children: JSX.Element[]
+  name: string
+  onChange?: (_e: number | string) => void
+  inline?: boolean
+  size: size
+}
+
 const radioContext = createContext<{
   defaultValue?: number | string
   className?: string
@@ -17,16 +27,6 @@ const radioContext = createContext<{
   inline: true,
   size: 'middle'
 })
-
-interface RadioGroupPropsInf {
-  defaultValue?: number | string
-  className?: string
-  children: JSX.Element[]
-  name: string
-  onChange?: (_e: number | string) => void
-  inline?: boolean
-  size: size
-}
 
 export default function RadioGroup(props: RadioGroupPropsInf) {
   const { defaultValue, className, name, children } = destructure(props)

@@ -15,7 +15,7 @@ export default [
           },
           {
             path: '/teams',
-            component: lazy(() => import('@/page/notice/notice'))
+            component: lazy(() => import('@/page/teams/teams'))
           },
           {
             path: '/notice',

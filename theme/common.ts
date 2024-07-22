@@ -11,10 +11,14 @@ const common = {
     cnf3: 'var(--colorNeutralForeground3)',
     cnf2h: 'var(--colorNeutralForeground2Hover)',
     cnb1: 'var(--colorNeutralBackground1Hover)',
+    cnf2: 'var(--colorNeutralForeground2)',
+    cnf1: 'var(--colorNeutralForeground1)',
+    ccbs: 'var(--colorCompoundBrandStroke)',
+    cns1h: 'var(--colorNeutralStroke1Hover)'
   },
   boxShadow: {
-    '16xl': 'var(--shadow16)',
-  },
-};
+    '16xl': 'var(--shadow16)'
+  }
+}
 
-export default common;
+export default common
