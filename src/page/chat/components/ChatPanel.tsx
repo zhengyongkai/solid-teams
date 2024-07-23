@@ -1,20 +1,27 @@
-import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
-import AvatarImg from '@/assets/img/avatar.png'
-import Avatar from '@/components/Common/Avatar/Avatar'
-import { createSignal } from 'solid-js'
-import DragMenu from '@/components/Common/DragMenu/DragMenu'
+import SvgIcon from '@/components/Common/SvgIcon/SvgIcon';
+import AvatarImg from '@/assets/img/avatar.png';
+import Avatar from '@/components/Common/Avatar/Avatar';
+import { createSignal, JSX } from 'solid-js';
+import DragMenu from '@/components/Common/DragMenu/DragMenu';
+import ChatBody from './ChatBody';
+import ChatFile from './ChatFile';
 
 export default function ChatPanel() {
-  const [tab, setTab] = createSignal<string | number>(1)
+  const [tab, setTab] = createSignal<string | number>(2);
+  const [componentsKey, setComponentsKey] = createSignal(2);
+  const componentsMap: { [key in number]: JSX.Element } = {
+    1: <ChatBody />,
+    2: <ChatFile />,
+  };
   const [tabList] = createSignal([
     {
       key: 1,
       title: '聊天',
-      isDrag: false
+      isDrag: false,
     },
     {
       key: 2,
-      title: '文件'
+      title: '文件',
     },
     {
       key: 3,
@@ -23,16 +30,16 @@ export default function ChatPanel() {
         {
           key: 123,
           title: '展开选项卡',
-          icon: 'launch'
+          icon: 'launch',
         },
         {
           key: 312331,
           title: '展开选项卡',
-          icon: 'launch'
-        }
-      ]
-    }
-  ])
+          icon: 'launch',
+        },
+      ],
+    },
+  ]);
 
   return (
     <div class="flex flex-col h-full ">
@@ -45,7 +52,8 @@ export default function ChatPanel() {
               tabList={tabList()}
               active={tab}
               onChange={(e) => {
-                setTab(e)
+                setTab(e);
+                setComponentsKey(e as number);
               }}
               onSubChange={(e) => {
                 // alert(e)
@@ -62,10 +70,7 @@ export default function ChatPanel() {
           </div>
         </div>
       </div>
-      <div class="flex-1"></div>
-      <div class="w-[90%] mb-14 mx-auto h-43 rounded-4 px-10 py-8  border-1 border-cns2">
-        <input type="text" class="h-full w-full outline-none rounded-4" placeholder="请输入内容" />
-      </div>
+      <div class="flex-1 overflow-hidden">{componentsMap[componentsKey()]}</div>
     </div>
-  )
+  );
 }

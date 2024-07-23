@@ -15,7 +15,7 @@ export default function TabPanel(props: TabPanelPropsInf) {
       <div>
         <LeftBar onClick={setSignal}></LeftBar>
       </div>
-      <div class="h-[calc(100vh-60px)] w-full overflow-y-auto">
+      <div class="h-[calc(100vh-48px)] w-full overflow-y-auto">
         {/* {Object.entries(componentMap).map((item) => {
             return <div class={item[0] === sign() ? 'block' : 'hidden'}>{item[1]}</div>
           })} */}
