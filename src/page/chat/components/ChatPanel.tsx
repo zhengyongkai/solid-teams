@@ -1,26 +1,38 @@
-import SvgIcon from '@/components/Common/SvgIcon/SvgIcon';
-import AvatarImg from '@/assets/img/avatar.png';
-import Avatar from '@/components/Common/Avatar/Avatar';
-import { createSignal } from 'solid-js';
-import DragMenu from '@/components/Common/DragMenu/DragMenu';
+import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
+import AvatarImg from '@/assets/img/avatar.png'
+import Avatar from '@/components/Common/Avatar/Avatar'
+import { createSignal } from 'solid-js'
+import DragMenu from '@/components/Common/DragMenu/DragMenu'
 
 export default function ChatPanel() {
-  const [tab, setTab] = createSignal<string | number>(1);
+  const [tab, setTab] = createSignal<string | number>(1)
   const [tabList] = createSignal([
     {
       key: 1,
       title: '聊天',
+      isDrag: false
     },
     {
       key: 2,
-      title: '文件',
+      title: '文件'
     },
     {
       key: 3,
       title: 'Tasks Memo',
-      isMenu: true,
-    },
-  ]);
+      subMenu: [
+        {
+          key: 123,
+          title: '展开选项卡',
+          icon: 'launch'
+        },
+        {
+          key: 312331,
+          title: '展开选项卡',
+          icon: 'launch'
+        }
+      ]
+    }
+  ])
 
   return (
     <div class="flex flex-col h-full ">
@@ -33,10 +45,13 @@ export default function ChatPanel() {
               tabList={tabList()}
               active={tab}
               onChange={(e) => {
-                setTab(e);
+                setTab(e)
+              }}
+              onSubChange={(e) => {
+                // alert(e)
               }}
               onDrag={(e) => {
-                console.log(e);
+                // console.log(e)
               }}
             ></DragMenu>
           </div>
@@ -49,12 +64,8 @@ export default function ChatPanel() {
       </div>
       <div class="flex-1"></div>
       <div class="w-[90%] mb-14 mx-auto h-43 rounded-4 px-10 py-8  border-1 border-cns2">
-        <input
-          type="text"
-          class="h-full w-full outline-none rounded-4"
-          placeholder="请输入内容"
-        />
+        <input type="text" class="h-full w-full outline-none rounded-4" placeholder="请输入内容" />
       </div>
     </div>
-  );
+  )
 }

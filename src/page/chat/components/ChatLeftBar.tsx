@@ -8,10 +8,10 @@ export default function ChatLeftBar() {
         <div class="font-700 text-18 flex-1">聊天</div>
         <div class="flex ">
           <div class="mr-8">
-            <SvgIcon name="setting" size={20} />
+            <SvgIcon name="setting" isButton size={20} />
           </div>
           <div>
-            <SvgIcon name="edit" size={20} />
+            <SvgIcon name="edit" isButton size={20} />
           </div>
         </div>
       </div>

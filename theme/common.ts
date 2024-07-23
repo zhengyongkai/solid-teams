@@ -14,7 +14,9 @@ const common = {
     cnf2: 'var(--colorNeutralForeground2)',
     cnf1: 'var(--colorNeutralForeground1)',
     ccbs: 'var(--colorCompoundBrandStroke)',
-    cns1h: 'var(--colorNeutralStroke1Hover)'
+    cns1h: 'var(--colorNeutralStroke1Hover)',
+    cnb1p: 'var(--colorNeutralBackground1Pressed)',
+    cnf2bs: 'var(--colorNeutralForeground2BrandSelected)'
   },
   boxShadow: {
     '16xl': 'var(--shadow16)'
