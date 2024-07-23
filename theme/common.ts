@@ -16,11 +16,13 @@ const common = {
     ccbs: 'var(--colorCompoundBrandStroke)',
     cns1h: 'var(--colorNeutralStroke1Hover)',
     cnb1p: 'var(--colorNeutralBackground1Pressed)',
-    cnf2bs: 'var(--colorNeutralForeground2BrandSelected)'
+    cnf2bs: 'var(--colorNeutralForeground2BrandSelected)',
+    //table
+    cttc: 'var(--colorTableThColor)',
   },
   boxShadow: {
-    '16xl': 'var(--shadow16)'
-  }
-}
+    '16xl': 'var(--shadow16)',
+  },
+};
 
-export default common
+export default common;

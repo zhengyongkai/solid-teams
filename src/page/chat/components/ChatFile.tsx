@@ -1,4 +1,5 @@
 import SvgIcon from '@/components/Common/SvgIcon/SvgIcon';
+import Table from '@/components/Common/Table/Table';
 
 export default function ChatFile() {
   return (
@@ -8,7 +9,7 @@ export default function ChatFile() {
         <span class="font-700">上传</span>
       </div>
       <div class="overflow-y-auto h-full px-20">
-        <div class="h-9000">dasd</div>
+        <Table></Table>
       </div>
     </div>
   );
