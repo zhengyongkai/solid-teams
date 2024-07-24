@@ -19,10 +19,12 @@ const common = {
     cnf2bs: 'var(--colorNeutralForeground2BrandSelected)',
     //table
     cttc: 'var(--colorTableThColor)',
+    ctbbc: 'var(-colorTableBorderBottomColor)',
+    ctbh: 'var(--colorTableBorderHover)'
   },
   boxShadow: {
-    '16xl': 'var(--shadow16)',
-  },
-};
+    '16xl': 'var(--shadow16)'
+  }
+}
 
-export default common;
+export default common

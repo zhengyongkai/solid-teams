@@ -3,36 +3,47 @@ import Table from '@/components/Common/Table/Table'
 
 export default function ChatFile() {
   const columns = [
-    { name: 'name', title: '名称', width: '150px' },
-    { name: 'x', title: 'X', width: '300px' },
-    { name: 'y', title: 'Y', width: '1200px' },
-    { name: 'date', title: '日期', width: '100px' }
+    { type: 'checkbox', width: '40px' },
+    {
+      name: 'name',
+      title: '图标',
+      render: (_data: number) => {
+        return (
+          <div>
+            <SvgIcon name="excel"></SvgIcon>
+          </div>
+        )
+      },
+      rowRender: () => {
+        return <SvgIcon name="file"></SvgIcon>
+      },
+      width: '40px'
+    },
+    { name: 'name', title: '名称' },
+    { name: 'date', title: '共享日期' },
+    { name: 'person', title: '发件人' }
   ]
 
   const dataList = [
     {
-      name: '1',
-      x: '郑永楷',
-      y: 1,
-      date: 1
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷'
     },
     {
-      name: '1',
-      x: '郑永楷',
-      y: 1,
-      date: 1
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷'
     },
     {
-      name: '1',
-      x: '郑永楷',
-      y: 1,
-      date: 1
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷'
     },
     {
-      name: '1',
-      x: '郑永楷',
-      y: 1,
-      date: 1
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷'
     }
   ]
   return (
@@ -41,7 +52,7 @@ export default function ChatFile() {
         <SvgIcon name="upload" className="mr-6"></SvgIcon>
         <span class="font-700">上传</span>
       </div>
-      <div class="overflow-y-auto h-full px-20">
+      <div class="overflow-y-auto h-full ">
         <Table dataSource={dataList} column={columns}></Table>
       </div>
     </div>

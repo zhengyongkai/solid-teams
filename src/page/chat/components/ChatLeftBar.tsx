@@ -15,7 +15,7 @@ export default function ChatLeftBar() {
           </div>
         </div>
       </div>
-      <div class="h-screenb flex-1">
+      <div class="h-screen flex-1">
         <FriendPanel title="已固定" defaultOpen={false}>
           <ChatItems></ChatItems>
         </FriendPanel>

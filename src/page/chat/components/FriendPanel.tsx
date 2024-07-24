@@ -51,7 +51,7 @@ export function ChatItems(props: ChatItemsPropsInf) {
   })
 
   return (
-    <div class={`hover:bg-white h-49 flex py-6 items-center ${classList()}`}>
+    <div class={`hover:bg-white h-49 flex py-6 items-center mx-4 rounded-4 ${classList()}`}>
       <div class="w-4 h-4 mx-6 border-1 border-black rounded-full bg-black"></div>
 
       <Avatar src={AvatarImg} online className="mr-12"></Avatar>

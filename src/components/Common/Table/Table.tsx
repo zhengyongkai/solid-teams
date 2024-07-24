@@ -1,4 +1,4 @@
-import { createContext, JSX } from 'solid-js'
+import { createContext, createSignal, JSX } from 'solid-js'
 import TableBody from './components/TableBody'
 import TableHead from './components/TableHead'
 
@@ -9,28 +9,36 @@ export interface columnPropsInf {
   column: tableType
 }
 
-export interface tableType {
-  type: string
-  name: string
-  width: string
-  render?: () => JSX.Element
-}
+// export interface tableType {
+//   type?: string
+//   name: string
+//   width?: string
+//   render?: () => JSX.Element
+//   title: string
+// }
 
 export interface tableColumnsInf {
-  type: string
+  type?: string
   title: string
-  width: string
+  name: string
+  width?: string
+  render?: () => JSX.Element
 }
 
 export interface tablePropsInf {
   column: tableColumnsInf[]
-  dataSource: tableType[]
+  dataSource: any[]
 }
 
 export const tableContext = createContext()
 
 export default function Table(props: tablePropsInf) {
   // const;
+
+  const [tableStore, setTableStore] = createSignal({
+    columns: props.column,
+    dataSource: props.dataSource
+  })
 
   return (
     <>
@@ -39,8 +47,10 @@ export default function Table(props: tablePropsInf) {
           ...props
         }}
       >
-        <TableHead></TableHead>
-        <TableBody></TableBody>
+        <div class="w-full overflow-auto">
+          <TableHead data={tableStore}></TableHead>
+          <TableBody data={tableStore}></TableBody>
+        </div>
       </tableContext.Provider>
     </>
   )
