@@ -21,7 +21,7 @@ export default function ChatLeftBar() {
         </FriendPanel>
         <FriendPanel title="最近" defaultOpen={true}>
           <ChatItems></ChatItems>
-          <ChatItems></ChatItems>
+          <ChatItems active={true}></ChatItems>
 
           <ChatItems></ChatItems>
           <ChatItems></ChatItems>
