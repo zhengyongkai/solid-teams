@@ -30,7 +30,11 @@ export interface tablePropsInf {
   dataSource: any[]
 }
 
-export const tableContext = createContext()
+export const tableContext = createContext<{
+  onRowChecked: Function
+}>({
+  onRowChecked: (e) => {}
+})
 
 export default function Table(props: tablePropsInf) {
   // const;
@@ -40,11 +44,13 @@ export default function Table(props: tablePropsInf) {
     dataSource: props.dataSource
   })
 
+  function onRowChecked(row, check) {}
+
   return (
     <>
       <tableContext.Provider
         value={{
-          ...props
+          onRowChecked
         }}
       >
         <div class="w-full overflow-auto">
