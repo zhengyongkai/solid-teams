@@ -11,6 +11,11 @@ html {
   overflow-y: overlay;
 }
 
+input:indeterminate {
+  --un-bg-opacity: 1;
+  background-color: red;
+}
+
 .scrollBar {
   overflow-y: overlay;
 }

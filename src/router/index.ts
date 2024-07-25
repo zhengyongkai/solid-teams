@@ -2,6 +2,10 @@ import { lazy } from 'solid-js'
 
 export default [
   {
+    path: '/xxx',
+    component: lazy(() => import('@/page/test/test'))
+  },
+  {
     path: '/',
     component: lazy(() => import('@/components/Layout/Common/Common')),
     children: [

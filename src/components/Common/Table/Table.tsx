@@ -1,63 +1,132 @@
-import { createContext, createSignal, JSX } from 'solid-js'
-import TableBody from './components/TableBody'
+import { createEffect, createMemo, createSignal, createUniqueId, Show } from 'solid-js'
+
+import { createSolidTable, flexRender, getCoreRowModel } from '@tanstack/solid-table'
+import Checkbox from '@/components/Form/Checkbox/Checkbox'
 import TableHead from './components/TableHead'
+import TableBody from './components/TableBody'
+import { createStore, produce } from 'solid-js/store'
 
-export interface TableHeadPropsInf {}
-
-export interface columnPropsInf {
-  type: string
-  column: tableType
+export interface TablePropsInf {
+  columns: Array<any>
+  dataSource: Array<any>
 }
 
-// export interface tableType {
-//   type?: string
-//   name: string
-//   width?: string
-//   render?: () => JSX.Element
-//   title: string
-// }
+export default function Table(props: TablePropsInf) {
+  const { dataSource, columns, setRowSelection = createSignal([]), rowKey = undefined } = props
 
-export interface tableColumnsInf {
-  type?: string
-  title: string
-  name: string
-  width?: string
-  render?: () => JSX.Element
-}
-
-export interface tablePropsInf {
-  column: tableColumnsInf[]
-  dataSource: any[]
-}
-
-export const tableContext = createContext<{
-  onRowChecked: Function
-}>({
-  onRowChecked: (e) => {}
-})
-
-export default function Table(props: tablePropsInf) {
-  // const;
-
-  const [tableStore, setTableStore] = createSignal({
-    columns: props.column,
-    dataSource: props.dataSource
+  const [checkOptions, setCheckOptions] = createStore({
+    checkedAll: false,
+    data: dataSource,
+    indeterminate: false
   })
 
-  function onRowChecked(row, check) {}
+  createEffect(() => {
+    setCheckOptions('data', initData(dataSource, rowKey))
+  })
+
+  const initData = (dataSource, rowKey) => {
+    dataSource.map((item) => {
+      item['_id'] = rowKey ? item[rowKey] : createUniqueId()
+      item['_checked'] = false
+    })
+
+    return dataSource
+  }
+
+  function onRowCheck(row: any, checked: boolean) {
+    setCheckOptions(
+      'data',
+      (item) => item._id === row._id,
+      produce((item: any) => (item._checked = checked))
+    )
+    let status: boolean | string = false
+    let checkedNum = 0
+    let total = 0
+    const checkedRowKeys: KeyType[] = []
+    checkOptions.data.forEach((item: any) => {
+      if (!item._disabled) {
+        total++
+      }
+      if (item._checked) {
+        checkedRowKeys.push(item.id)
+        checkedNum++
+      }
+    })
+    setCheckOptions('indeterminate', checkedNum !== 0)
+    if (checkedNum >= total) {
+      status = true
+      setCheckOptions('indeterminate', false)
+    }
+    setCheckOptions('checkedAll', status)
+  }
+
+  const onHeadChecked = (checked: boolean) => {
+    setCheckOptions('checkedAll', checked)
+    setCheckOptions(
+      'data',
+      (item) => (checked ? !item._disabled && !item._checked : !item._disabled && item._checked),
+      produce((item: any) => (item._checked = checked))
+    )
+  }
+
+  const columnsOptions = createMemo(() => {
+    let result = [
+      {
+        id: 'select',
+        size: 40,
+        header: ({ table }) => (
+          <div class="text-center">
+            <Checkbox
+              checked={checkOptions.checkedAll}
+              ineterminate={checkOptions.indeterminate}
+              onchange={(e) => onHeadChecked(e.target.checked)}
+            />
+          </div>
+        ),
+        cell: ({ row }) => {
+          return (
+            <div class="text-center">
+              <Checkbox
+                classList="checkbox"
+                checked={row.original._checked}
+                onchange={(e) => {
+                  row.original._checked = e.target.checked
+                  onRowCheck(row, e.target.checked)
+                }}
+              />
+            </div>
+          )
+        }
+      }
+    ]
+    columns.map((item) => {
+      result.push({
+        header: item.title,
+        accessorKey: item.name,
+        size: item.width,
+        cell: ({ cell, row }) => {
+          return <td>{item.render ? item.render(row) : cell.getValue()}</td>
+        }
+      })
+    })
+    return result
+  })
+
+  const table = createSolidTable({
+    data: dataSource,
+    enableRowSelection: true, //enable row selection for all rows
+    columns: columnsOptions(),
+    getCoreRowModel: getCoreRowModel()
+  })
 
   return (
     <>
-      <tableContext.Provider
-        value={{
-          onRowChecked
-        }}
-      >
-        <div class="w-full overflow-auto">
-          <TableHead data={tableStore}></TableHead>
-          <TableBody data={tableStore}></TableBody>
-        </div>
-      </tableContext.Provider>
+      <div class="overflow-y-auto">
+        <table class="table-fixed w-full">
+          <TableHead table={table}></TableHead>
+          <TableBody table={table}></TableBody>
+        </table>
+      </div>
     </>
   )
 }
