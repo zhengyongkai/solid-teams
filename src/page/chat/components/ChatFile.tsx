@@ -1,9 +1,7 @@
 import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
 import Table from '@/components/Common/Table/Table'
-import { createSignal } from 'solid-js'
 
 export default function ChatFile() {
-  const [rowKeys, setRowKey] = createSignal({})
   const columns = [
     {
       name: 'name',
@@ -18,46 +16,52 @@ export default function ChatFile() {
       rowRender: () => {
         return <SvgIcon name="file"></SvgIcon>
       },
-      width: 80
+      width: '40px'
     },
-    { name: 'Name', title: '名称', width: 200 },
+    { name: 'name', title: '名称' },
     { name: 'date', title: '共享日期' },
     { name: 'person', title: '发件人' }
   ]
 
-  const [dataList] = createSignal([
+  const dataList = [
     {
-      Name: 'Excel第一个',
+      id: 1,
+      name: 'Excel第一个',
       date: '2020-04-05',
       person: '郑永楷'
     },
     {
-      Name: 'Excel第一个',
+      id: 2,
+      name: 'Excel第一个',
       date: '2020-04-05',
       person: '郑永楷'
     },
     {
-      Name: 'Excel第一个',
+      id: 3,
+      name: 'Excel第一个',
       date: '2020-04-05',
       person: '郑永楷'
     },
     {
-      Name: 'Excel第一个',
+      id: 4,
+      name: 'Excel第一个',
       date: '2020-04-05',
       person: '郑永楷'
     }
-  ])
+  ]
   return (
     <div class="overflow-hidden h-full">
       <div class="px-20 h-46 flex items-center text-cnf3 pointer-cursor sticky top-0">
         <SvgIcon name="upload" className="mr-6"></SvgIcon>
         <span class="font-700">上传</span>
       </div>
-      <div class="overflow-y-auto h-full px-20">
+      <div class="overflow-y-auto h-full ">
         <Table
-          dataSource={dataList()}
-          columns={columns}
-          setRowSelection={[rowKeys, setRowKey]}
+          dataSource={dataList}
+          column={columns}
+          onRowChecked={(data) => {
+            console.log(data)
+          }}
         ></Table>
       </div>
     </div>

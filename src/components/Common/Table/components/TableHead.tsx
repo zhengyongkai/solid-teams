@@ -1,38 +1,32 @@
-import { For, Show } from 'solid-js'
+import { For } from 'solid-js'
 import TableCell from './TableCell'
-import { flexRender } from '@tanstack/solid-table'
 
 interface TableHeadPropsInf {
-  table: any
+  data: any
 }
 
 export default function TableHead(props: TableHeadPropsInf) {
-  let { table } = props
+  console.log(props)
   return (
     <>
-      <thead>
-        <For each={table.getHeaderGroups()}>
-          {(headerGroup) => (
-            <tr>
-              <For each={headerGroup.headers}>
-                {(header) => {
-                  return (
-                    <th
-                      colSpan={header.colSpan}
-                      class="text-left text-12 font-400 h-40 text-cttc"
-                      style={{ width: header.column.columnDef.size + 'px' }}
-                    >
-                      <Show when={!header.isPlaceholder}>
-                        {flexRender(header.column.columnDef.header, header.getContext())}
-                      </Show>
-                    </th>
-                  )
-                }}
-              </For>
-            </tr>
-          )}
-        </For>
-      </thead>
+      <table class="table-fixed border-collapse w-full">
+        <thead>
+          <tr class="text-12 font-400 h-40 text-cttc border-b-1 border-ctbbc">
+            <For each={props.data.columns}>
+              {(col) => {
+                return (
+                  <TableCell
+                    type="th"
+                    column={col}
+                    checked={props.data.isCheckedAll}
+                    indeterminate={props.data.indeterminate}
+                  ></TableCell>
+                )
+              }}
+            </For>
+          </tr>
+        </thead>
+      </table>
     </>
   )
 }

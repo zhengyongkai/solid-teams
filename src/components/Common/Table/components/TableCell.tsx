@@ -1,15 +1,33 @@
-import { createMemo, Match, useContext } from 'solid-js'
-import { columnPropsInf, tableContext } from '../Table'
+import { createMemo, JSX, Match, useContext } from 'solid-js'
+import { columnPropsInf, tableColumnsInf, tableContext } from '../Table'
+import { destructure } from '@solid-primitives/destructure'
+import Checkbox from '@/components/Form/Checkbox/Checkbox'
 
-export default function TableCell(props: columnPropsInf) {
+export default function TableCell(props: {
+  type: string
+  column: tableColumnsInf
+  dataSource?: any
+  checked: boolean
+  indeterminate: boolean
+}) {
   let { type, column, dataSource } = props
+  let { checked, indeterminate } = destructure(props)
 
-  const components = createMemo(() => {
-    const { onRowChecked } = useContext(tableContext)
+  const components = createMemo<any>(() => {
+    const { onRowChecked, onRowCheckedAll } = useContext(tableContext)
 
     if (type === 'th') {
       if (column.type === 'checkbox') {
-        return <input type="checkbox" class="flex items-center m-auto" />
+        return (
+          <Checkbox
+            classList="flex items-center m-auto"
+            checked={checked()}
+            indeterminate={indeterminate()}
+            onchange={(e) => {
+              onRowCheckedAll(e.target.checked)
+            }}
+          ></Checkbox>
+        )
       } else if (column.rowRender) {
         return column.rowRender
       }
@@ -17,16 +35,22 @@ export default function TableCell(props: columnPropsInf) {
     } else {
       let data = dataSource[props.column.name]
 
-      console.log(dataSource['_checked'])
-
       if (column.type === 'checkbox') {
         return (
-          <input
-            type="checkbox"
-            class=" flex items-center m-auto"
-            checked={dataSource['_checked']}
-            onChange={(e) => onRowChecked(dataSource, e.target.checked)}
-          />
+          <span
+            class="w-full h-full"
+            onclick={(e) => {
+              e.stopPropagation()
+            }}
+          >
+            <Checkbox
+              classList={`items-center m-auto hidden `}
+              checked={dataSource['_checked']}
+              onchange={(e) => {
+                onRowChecked(dataSource, e.target.checked)
+              }}
+            ></Checkbox>
+          </span>
         )
       } else if (column.render) {
         return column.render(data)

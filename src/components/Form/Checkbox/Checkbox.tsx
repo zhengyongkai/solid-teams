@@ -6,17 +6,21 @@ type changeEvent = Event & { currentTarget: HTMLInputElement; target: HTMLInputE
 interface CheckboxPropsInf {
   checked: boolean
   onchange?: (e: changeEvent) => void
-  ineterminate?: boolean
+  indeterminate?: boolean
   classList?: string
 }
 
 export default function Checkbox(props: CheckboxPropsInf) {
-  const { ineterminate = createSignal(false)[0], checked, classList } = destructure(props)
+  const {
+    indeterminate = createSignal(false)[0],
+    classList = createSignal('')[0],
+    checked
+  } = destructure(props)
   const { onchange } = props
   const id = createUniqueId()
   createEffect(
     on(
-      () => ineterminate(),
+      () => indeterminate(),
       (value) => {
         const input: any = document.getElementById(`${id}`)
         if (typeof value === 'boolean') {
@@ -28,7 +32,7 @@ export default function Checkbox(props: CheckboxPropsInf) {
   return (
     <input
       id={id}
-      class={`${classList} checkbox  checkbox-primary`}
+      class={`${classList()}`}
       type="checkbox"
       checked={checked()}
       onchange={(e) => {
