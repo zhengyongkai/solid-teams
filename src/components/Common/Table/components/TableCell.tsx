@@ -46,6 +46,7 @@ export default function TableCell(props: {
             <Checkbox
               classList={`items-center m-auto hidden `}
               checked={dataSource['_checked']}
+              disabled={dataSource['_disabled']}
               onchange={(e) => {
                 onRowChecked(dataSource, e.target.checked)
               }}
@@ -53,7 +54,7 @@ export default function TableCell(props: {
           </span>
         )
       } else if (column.render) {
-        return column.render(data)
+        return column.render(data, dataSource)
       }
       return <td>{dataSource[props.column.name]}</td>
     }

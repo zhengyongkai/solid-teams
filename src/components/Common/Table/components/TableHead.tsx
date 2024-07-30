@@ -6,7 +6,6 @@ interface TableHeadPropsInf {
 }
 
 export default function TableHead(props: TableHeadPropsInf) {
-  console.log(props)
   return (
     <>
       <table class="table-fixed border-collapse w-full">

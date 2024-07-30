@@ -23,14 +23,16 @@ export interface tableColumnsInf {
   title?: string
   name: string
   width?: string
-  render?: (dataSource: any) => JSX.Element
+  render?: (_text: string, dataSource: any) => JSX.Element
   rowRender?: () => JSX.Element
 }
 
-export interface tablePropsInf {
+export interface tablePropsInf<T> {
   column: tableColumnsInf[]
   dataSource: any[]
-  onRowChecked?: (dataSource: Array<any>) => void
+  onRowChecked?: (dataSource: Array<T>) => void
+  selectedRowKeys?: Array<number | string>
+  rowKey?: string
 }
 
 export interface tableContextInf {
@@ -40,6 +42,8 @@ export interface tableContextInf {
   indeterminate: boolean
   onRowChecked: (_tableSource: any, _checked: boolean) => void
   onRowCheckedAll: (_checked: boolean) => void
+  isCheckTable: undefined | any
+  rowKey: string
 }
 
 export const tableContext = createContext({
@@ -47,32 +51,43 @@ export const tableContext = createContext({
   onRowCheckedAll: (_checked: boolean) => {}
 })
 
-export default function Table(props: tablePropsInf) {
+interface extendInf {
+  id: string | number
+  _checked?: boolean
+  _disabled?: boolean
+}
+
+export default function Table<T extends extendInf>(props: tablePropsInf<T>) {
   // const;
 
-  createEffect(() => {})
+  let { rowKey = 'id' } = props
 
   const [tableStore, setTableStore] = createStore<tableContextInf>({
     columns: props.column,
-    dataSource: props.dataSource,
+    dataSource: props.dataSource as Array<T>,
     isCheckedAll: false,
     indeterminate: false,
-    onRowChecked: (_tableSource: any, _checked: boolean) => {},
-    onRowCheckedAll: (_checked: boolean) => {}
+    onRowChecked: (_tableSource: T, _checked: boolean) => {},
+    onRowCheckedAll: (_checked: boolean) => {},
+    isCheckTable: props.column.filter((item) => item.type === 'checkbox')[0],
+    rowKey: rowKey ? rowKey : 'id'
   })
 
-  const onRowChecked = (tableSource: any, checked: boolean) => {
+  const onRowChecked = (tableSource: T, checked: boolean) => {
+    if (!tableStore.isCheckTable) {
+      return
+    }
     setTableStore(
       'dataSource',
-      (item) => item.id === tableSource.id,
+      (item) => item[rowKey] === tableSource[rowKey] && !item._disabled,
       produce((item: any) => (item._checked = checked))
     )
 
     let status: boolean | string = false
     let checkedNum = 0
     let total = 0
-    const checkedRowKeys: KeyType[] = []
-    tableStore.dataSource.forEach((item: any) => {
+    const checkedRowKeys = []
+    tableStore.dataSource.forEach((item: T) => {
       if (!item._disabled) {
         total++
       }
@@ -103,12 +118,23 @@ export default function Table(props: tablePropsInf) {
     setTableStore(
       'dataSource',
       (item) => (checked ? !item._disabled && !item._checked : !item._disabled && item._checked),
-      produce((item: any) => (item._checked = checked))
+      produce((item: T) => (item._checked = checked))
     )
     props.onRowChecked
       ? props.onRowChecked(tableStore.dataSource.filter((item) => item._checked))
       : null
   }
+
+  // const rowSelection = {
+  //   onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+  //     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+  //   },
+  //   getCheckboxProps: (record: DataType) => ({
+  //     disabled: record.name === 'Disabled User', // Column configuration not to be checked
+  //     name: record.name,
+  //   }),
+  // };
+
   return (
     <>
       <tableContext.Provider

@@ -8,13 +8,15 @@ interface CheckboxPropsInf {
   onchange?: (e: changeEvent) => void
   indeterminate?: boolean
   classList?: string
+  disabled?: boolean
 }
 
 export default function Checkbox(props: CheckboxPropsInf) {
   const {
     indeterminate = createSignal(false)[0],
     classList = createSignal('')[0],
-    checked
+    checked,
+    disabled = createSignal(false)[0]
   } = destructure(props)
   const { onchange } = props
   const id = createUniqueId()
@@ -29,9 +31,12 @@ export default function Checkbox(props: CheckboxPropsInf) {
       }
     )
   )
+
+  console.log(disabled())
   return (
     <input
       id={id}
+      disabled={disabled()}
       class={`${classList()}`}
       type="checkbox"
       checked={checked()}

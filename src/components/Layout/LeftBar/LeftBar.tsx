@@ -51,7 +51,7 @@ export default function LeftBar(props: LeftBarInf) {
   // const [index] = createSignal(0)
 
   return (
-    <div class="w-68 bg-cnb5 h-[calc(100vh-48px)] relative">
+    <div class="w-68 bg-cnb5 h-[calc(100vh-48px)] relative ">
       <div>
         {barItems.map((item) => {
           return (
