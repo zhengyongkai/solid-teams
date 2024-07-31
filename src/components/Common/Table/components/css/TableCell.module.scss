@@ -1,10 +1,10 @@
 .table-body-columns {
   input[type='checkbox']:checked {
-    display: flex !important;
+    // display: flex !important;
   }
   &:hover {
     input[type='checkbox'] {
-      display: flex !important;
+      // display: flex !important;
     }
   }
 }

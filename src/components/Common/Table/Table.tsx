@@ -1,4 +1,13 @@
-import { createContext, createEffect, createSignal, JSX } from 'solid-js'
+import {
+  Accessor,
+  createContext,
+  createEffect,
+  createSignal,
+  JSX,
+  on,
+  Setter,
+  Signal
+} from 'solid-js'
 import TableBody from './components/TableBody'
 import TableHead from './components/TableHead'
 import { createStore, produce } from 'solid-js/store'
@@ -25,6 +34,8 @@ export interface tableColumnsInf {
   width?: string
   render?: (_text: string, dataSource: any) => JSX.Element
   rowRender?: () => JSX.Element
+  sorter?: (_a: any, b: any) => void
+  _sorter?: string
 }
 
 export interface tablePropsInf<T> {
@@ -33,6 +44,7 @@ export interface tablePropsInf<T> {
   onRowChecked?: (dataSource: Array<T>) => void
   selectedRowKeys?: Array<number | string>
   rowKey?: string
+  rowSelectKey?: [Accessor<any[]>, Setter<any[]>]
 }
 
 export interface tableContextInf {
@@ -60,11 +72,11 @@ interface extendInf {
 export default function Table<T extends extendInf>(props: tablePropsInf<T>) {
   // const;
 
-  let { rowKey = 'id' } = props
+  let { rowKey = 'id', rowSelectKey: [_rows, setRows] = createSignal<any[]>([]) } = props
 
   const [tableStore, setTableStore] = createStore<tableContextInf>({
     columns: props.column,
-    dataSource: props.dataSource as Array<T>,
+    dataSource: props.dataSource,
     isCheckedAll: false,
     indeterminate: false,
     onRowChecked: (_tableSource: T, _checked: boolean) => {},
@@ -83,6 +95,30 @@ export default function Table<T extends extendInf>(props: tablePropsInf<T>) {
       produce((item: any) => (item._checked = checked))
     )
 
+    checkHead()
+    triggerCheck()
+  }
+
+  const onRowCheckedAll = (checked: boolean) => {
+    setTableStore('isCheckedAll', checked)
+    setTableStore(
+      'dataSource',
+      (item) => (checked ? !item._disabled && !item._checked : !item._disabled && item._checked),
+      produce((item: T) => (item._checked = checked))
+    )
+    triggerCheck()
+  }
+
+  const triggerCheck = () => {
+    props.onRowChecked
+      ? props.onRowChecked(tableStore.dataSource.filter((item) => item._checked))
+      : null
+
+    // 设置值
+    setRows(tableStore.dataSource.filter((item) => item._checked).map((item) => item[rowKey]))
+  }
+
+  const checkHead = () => {
     let status: boolean | string = false
     let checkedNum = 0
     let total = 0
@@ -108,32 +144,27 @@ export default function Table<T extends extendInf>(props: tablePropsInf<T>) {
     }
 
     setTableStore('isCheckedAll', status)
-    props.onRowChecked
-      ? props.onRowChecked(tableStore.dataSource.filter((item) => item._checked))
-      : null
   }
 
-  const onRowCheckedAll = (checked: boolean) => {
-    setTableStore('isCheckedAll', checked)
+  const resetTable = () => {
     setTableStore(
       'dataSource',
-      (item) => (checked ? !item._disabled && !item._checked : !item._disabled && item._checked),
-      produce((item: T) => (item._checked = checked))
+      (item) => item,
+      produce((item: any) => (item._checked = false))
     )
-    props.onRowChecked
-      ? props.onRowChecked(tableStore.dataSource.filter((item) => item._checked))
-      : null
   }
 
-  // const rowSelection = {
-  //   onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
-  //     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  //   },
-  //   getCheckboxProps: (record: DataType) => ({
-  //     disabled: record.name === 'Disabled User', // Column configuration not to be checked
-  //     name: record.name,
-  //   }),
-  // };
+  createEffect(
+    on(_rows, function (val) {
+      resetTable()
+      setTableStore(
+        'dataSource',
+        (item) => val.includes(item[rowKey]) && !item._disabled,
+        produce((item: any) => (item._checked = true))
+      )
+      checkHead()
+    })
+  )
 
   return (
     <>

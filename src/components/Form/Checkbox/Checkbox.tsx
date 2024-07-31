@@ -32,7 +32,6 @@ export default function Checkbox(props: CheckboxPropsInf) {
     )
   )
 
-  console.log(disabled())
   return (
     <input
       id={id}

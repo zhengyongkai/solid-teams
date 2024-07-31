@@ -3,7 +3,7 @@ import FriendPanel, { ChatItems } from './FriendPanel'
 
 export default function ChatLeftBar() {
   return (
-    <div class="bg-cdb7 flex flex-col h-full">
+    <div class="bg-cdb7 flex flex-col h-full ">
       <div class="h-61 flex items-center px-16 border-b-1 border-cnss flex-shrink-0">
         <div class="font-700 text-18 flex-1">聊天</div>
         <div class="flex ">

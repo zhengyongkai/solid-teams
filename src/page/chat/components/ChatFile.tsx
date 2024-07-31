@@ -1,5 +1,6 @@
 import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
 import Table from '@/components/Common/Table/Table'
+import { createSignal, Show } from 'solid-js'
 
 interface FileTableInf {
   icon: string
@@ -10,6 +11,8 @@ interface FileTableInf {
 }
 
 export default function ChatFile() {
+  const [getS, setS] = createSignal<number[]>([1])
+
   const columns = [
     { type: 'checkbox', width: '40px', name: 'checkbox' },
     {
@@ -41,7 +44,7 @@ export default function ChatFile() {
       },
       width: '40px'
     },
-    { name: 'name', title: '名称' },
+    { name: 'name', title: '名称', sorter: () => {} },
     { name: 'date', title: '共享日期' },
     { name: 'person', title: '发件人' }
   ]
@@ -75,19 +78,115 @@ export default function ChatFile() {
       date: '2020-04-05',
       person: '郑永楷',
       _disabled: true
+    },
+    {
+      icon: 'excel',
+      id: 5,
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷'
+    },
+    {
+      icon: 'excel',
+      id: 6,
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷'
+    },
+    {
+      icon: 'excel',
+      id: 7,
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷'
+    },
+    {
+      icon: 'file',
+      id: 8,
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷',
+      _disabled: true
+    },
+    {
+      icon: 'excel',
+      id: 9,
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷'
+    },
+    {
+      icon: 'excel',
+      id: 10,
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷'
+    },
+    {
+      icon: 'excel',
+      id: 11,
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷'
+    },
+    {
+      icon: 'file',
+      id: 12,
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷',
+      _disabled: true
+    },
+    {
+      icon: 'excel',
+      id: 13,
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷'
+    },
+    {
+      icon: 'excel',
+      id: 14,
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷'
+    },
+    {
+      icon: 'excel',
+      id: 15,
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷'
+    },
+    {
+      icon: 'file',
+      id: 16,
+      name: 'Excel第一个',
+      date: '2020-04-05',
+      person: '郑永楷',
+      _disabled: true
     }
   ]
   return (
     <div class="overflow-hidden h-full">
-      <div class="px-40 h-46 flex items-center text-cnf3 cursor-pointer top-0">
-        <SvgIcon name="upload" className="mr-6"></SvgIcon>
-        <span class="font-700">上传</span>
+      <div class="pl-40 pr-10 h-46 font-700 text-14 flex items-center text-cnf3 cursor-pointer top-0">
+        <div class="flex items-center">
+          <SvgIcon name="upload" className="mr-6"></SvgIcon>
+          <span>上传</span>
+        </div>
+        <Show when={getS().length}>
+          <div class="ml-auto flex items-center" onClick={() => setS([])}>
+            <SvgIcon name="delChoose" className="mr-6"></SvgIcon>
+            <span>已选择 {getS().length}</span>
+          </div>
+        </Show>
       </div>
       <div class="overflow-y-auto h-full ">
         <Table<FileTableInf>
           dataSource={dataList}
           column={columns}
           rowKey={'id'}
+          rowSelectKey={[getS, setS]}
           onRowChecked={(_data) => {
             // console.log(data.filter(item))
           }}
