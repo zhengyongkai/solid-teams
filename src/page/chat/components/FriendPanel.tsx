@@ -3,6 +3,7 @@ import { Accessor, createMemo, createSignal, JSX, Show } from 'solid-js'
 import AvatarImg from '@/assets/img/avatar.png'
 import Avatar from '@/components/Common/Avatar/Avatar'
 import { destructure } from '@solid-primitives/destructure'
+import { ChatItemDataInf } from '../types/chat'
 
 interface FriendPanelInf {
   children: JSX.Element
@@ -37,13 +38,15 @@ export default function FriendPanel(props: FriendPanelInf) {
 
 interface ChatItemsPropsInf {
   active?: boolean
+  data: ChatItemDataInf
+  onChange?: (_e: ChatItemDataInf) => void
 }
 
 export function ChatItems(props: ChatItemsPropsInf) {
-  const { active } = destructure(props)
+  const { active = createSignal(false)[0] } = destructure(props)
+  const { data, onChange } = props
 
   const classList = createMemo(() => {
-    console.log(active && active())
     if (active && active()) {
       return 'bg-white!'
     }
@@ -51,18 +54,29 @@ export function ChatItems(props: ChatItemsPropsInf) {
   })
 
   return (
-    <div class={`hover:bg-white h-49 flex py-6 items-center mx-4 rounded-4 ${classList()}`}>
+    <div
+      class={`hover:bg-white h-49 flex py-6 items-center mx-4 rounded-4  cursor-pointer relative mb-2 ${classList()}  `}
+      onClick={() => {
+        onChange?.(data)
+      }}
+    >
       <div class="w-4 h-4 mx-6 border-1 border-black rounded-full bg-black"></div>
 
       <Avatar src={AvatarImg} online className="mr-12"></Avatar>
 
       <div class="flex-1 mr-16 font-700">
         <div class="flex">
-          <div class="flex-1 text-14  h-20">郑永楷</div>
-          <div class="h-16  text-12 ">14:25</div>
+          <div class="flex-1 text-14  h-20">{data.name}</div>
+          <div class="h-16  text-12 ">{data.date}</div>
         </div>
         <div class=" text-12 font-700 ">你：1</div>
       </div>
+
+      <Show when={active()}>
+        <div class="absolute right-4  top-0 bottom-0 bg-white flex items-center justify-center w-50 hover:text-cnf2bs">
+          <SvgIcon name="setting" isButton size={20} />
+        </div>
+      </Show>
     </div>
   )
 }

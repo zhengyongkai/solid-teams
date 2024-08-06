@@ -58,16 +58,16 @@ export interface tableContextInf {
   rowKey: string
 }
 
-export const tableContext = createContext({
-  onRowChecked: (_tableSource: any, _checked: boolean) => {},
-  onRowCheckedAll: (_checked: boolean) => {}
-})
-
 interface extendInf {
   id: string | number
   _checked?: boolean
   _disabled?: boolean
 }
+
+export const tableContext = createContext({
+  onRowChecked: (_tableSource: any, _checked: boolean) => {},
+  onRowCheckedAll: (_checked: boolean) => {}
+})
 
 export default function Table<T extends extendInf>(props: tablePropsInf<T>) {
   // const;

@@ -20,23 +20,12 @@ export default function ChatFile() {
       title: '图标',
       render: (_text: string, _dataSource: any) => {
         return (
-          <div>
-            {_text === 'excel' ? (
-              <SvgIcon
-                name="excel"
-                onClick={() => {
-                  console.log(_text, _dataSource)
-                }}
-              ></SvgIcon>
-            ) : (
-              <SvgIcon
-                name="folder"
-                onClick={() => {
-                  console.log(_text, _dataSource)
-                }}
-              ></SvgIcon>
-            )}
-          </div>
+          <SvgIcon
+            name={_text === 'excel' ? 'excel' : 'folder'}
+            onClick={() => {
+              console.log(_text, _dataSource)
+            }}
+          ></SvgIcon>
         )
       },
       rowRender: () => {
@@ -54,126 +43,37 @@ export default function ChatFile() {
       icon: 'excel',
       id: 1,
       name: 'Excel第一个',
-      date: '2020-04-05',
+      date: '13:50',
       person: '郑永楷'
     },
     {
       icon: 'excel',
       id: 2,
       name: 'Excel第一个',
-      date: '2020-04-05',
+      date: '13:50',
       person: '郑永楷'
     },
     {
-      icon: 'excel',
+      icon: 'folder',
       id: 3,
       name: 'Excel第一个',
-      date: '2020-04-05',
+      date: '13:50',
       person: '郑永楷'
-    },
-    {
-      icon: 'file',
-      id: 4,
-      name: 'Excel第一个',
-      date: '2020-04-05',
-      person: '郑永楷',
-      _disabled: true
-    },
-    {
-      icon: 'excel',
-      id: 5,
-      name: 'Excel第一个',
-      date: '2020-04-05',
-      person: '郑永楷'
-    },
-    {
-      icon: 'excel',
-      id: 6,
-      name: 'Excel第一个',
-      date: '2020-04-05',
-      person: '郑永楷'
-    },
-    {
-      icon: 'excel',
-      id: 7,
-      name: 'Excel第一个',
-      date: '2020-04-05',
-      person: '郑永楷'
-    },
-    {
-      icon: 'file',
-      id: 8,
-      name: 'Excel第一个',
-      date: '2020-04-05',
-      person: '郑永楷',
-      _disabled: true
-    },
-    {
-      icon: 'excel',
-      id: 9,
-      name: 'Excel第一个',
-      date: '2020-04-05',
-      person: '郑永楷'
-    },
-    {
-      icon: 'excel',
-      id: 10,
-      name: 'Excel第一个',
-      date: '2020-04-05',
-      person: '郑永楷'
-    },
-    {
-      icon: 'excel',
-      id: 11,
-      name: 'Excel第一个',
-      date: '2020-04-05',
-      person: '郑永楷'
-    },
-    {
-      icon: 'file',
-      id: 12,
-      name: 'Excel第一个',
-      date: '2020-04-05',
-      person: '郑永楷',
-      _disabled: true
-    },
-    {
-      icon: 'excel',
-      id: 13,
-      name: 'Excel第一个',
-      date: '2020-04-05',
-      person: '郑永楷'
-    },
-    {
-      icon: 'excel',
-      id: 14,
-      name: 'Excel第一个',
-      date: '2020-04-05',
-      person: '郑永楷'
-    },
-    {
-      icon: 'excel',
-      id: 15,
-      name: 'Excel第一个',
-      date: '2020-04-05',
-      person: '郑永楷'
-    },
-    {
-      icon: 'file',
-      id: 16,
-      name: 'Excel第一个',
-      date: '2020-04-05',
-      person: '郑永楷',
-      _disabled: true
     }
   ]
   return (
     <div class="overflow-hidden h-full">
       <div class="pl-40 pr-10 h-46 font-700 text-14 flex items-center text-cnf3 cursor-pointer top-0">
-        <div class="flex items-center">
+        <div class="flex items-center mr-32">
           <SvgIcon name="upload" className="mr-6"></SvgIcon>
           <span>上传</span>
         </div>
+        <Show when={getS().length === 1}>
+          <div class="flex items-center">
+            <SvgIcon name="copylink" className="mr-12"></SvgIcon>
+            <span>复制链接</span>
+          </div>
+        </Show>
         <Show when={getS().length}>
           <div class="ml-auto flex items-center" onClick={() => setS([])}>
             <SvgIcon name="delChoose" className="mr-6"></SvgIcon>
