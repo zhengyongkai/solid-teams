@@ -33,15 +33,18 @@ export default function Checkbox(props: CheckboxPropsInf) {
   )
 
   return (
-    <input
-      id={id}
-      disabled={disabled()}
-      class={`${classList()}`}
-      type="checkbox"
-      checked={checked()}
-      onchange={(e) => {
-        onchange ? onchange(e) : null
-      }}
-    />
+    <div>
+      <input
+        id={id}
+        disabled={disabled()}
+        class={`${classList()}`}
+        type="checkbox"
+        checked={checked()}
+        onchange={(e) => {
+          onchange ? onchange(e) : null
+        }}
+      />
+      <div></div>
+    </div>
   )
 }

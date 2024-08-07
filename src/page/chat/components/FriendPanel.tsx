@@ -17,7 +17,7 @@ export default function FriendPanel(props: FriendPanelInf) {
   return (
     <>
       <div
-        class="flex h-24 items-center mt-12 text-10 mx-4 px-2 py-4"
+        class="flex h-24 items-center mt-12 text-10 mx-4 px-2 py-4 cursor-pointer"
         onClick={() => {
           setisContractions(!isContractions())
         }}
