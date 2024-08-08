@@ -41,7 +41,7 @@ export default function LeftBar(props: LeftBarInf) {
 
   const routeParams = createMemo(() => {
     let index = barItems.findIndex((item) => item.path === location.pathname)
-    console.log(index)
+    // console.log(index)
     return {
       pathname: location.pathname,
       index

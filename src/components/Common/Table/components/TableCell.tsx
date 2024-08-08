@@ -19,14 +19,15 @@ export default function TableCell(props: {
     if (type === 'th') {
       if (column.type === 'checkbox') {
         return (
-          <Checkbox
-            classList="flex items-center m-auto"
-            checked={checked()}
-            indeterminate={indeterminate()}
-            onchange={(e) => {
-              onRowCheckedAll(e.target.checked)
-            }}
-          ></Checkbox>
+          <div class={`items-center m-auto flex justify-center`}>
+            <Checkbox
+              checked={checked()}
+              indeterminate={indeterminate()}
+              onchange={(e) => {
+                onRowCheckedAll(e)
+              }}
+            ></Checkbox>
+          </div>
         )
       } else if (column.rowRender) {
         return column.rowRender
@@ -37,8 +38,8 @@ export default function TableCell(props: {
 
       if (column.type === 'checkbox') {
         return (
-          <span
-            class="w-full h-full"
+          <div
+            class={`items-center m-auto flex justify-center`}
             onclick={(e) => {
               e.stopPropagation()
             }}
@@ -48,10 +49,10 @@ export default function TableCell(props: {
               checked={dataSource['_checked']}
               disabled={dataSource['_disabled']}
               onchange={(e) => {
-                onRowChecked(dataSource, e.target.checked)
+                onRowChecked(dataSource, e)
               }}
             ></Checkbox>
-          </span>
+          </div>
         )
       } else if (column.render) {
         return column.render(data, dataSource)

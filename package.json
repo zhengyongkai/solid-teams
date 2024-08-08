@@ -17,6 +17,7 @@
     "@thisbeyond/solid-dnd": "^0.7.5",
     "@unocss/preset-rem-to-px": "^0.61.3",
     "@unocss/reset": "^0.61.5",
+    "solid-contextmenu": "^0.0.2",
     "solid-js": "^1.8.17",
     "solid-keep-alive": "^0.2.3",
     "solid-transition-group": "^0.0.10",

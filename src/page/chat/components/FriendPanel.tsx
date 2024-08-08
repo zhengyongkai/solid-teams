@@ -1,5 +1,5 @@
 import SvgIcon from '@/components/Common/SvgIcon/SvgIcon'
-import { Accessor, createMemo, createSignal, JSX, Show } from 'solid-js'
+import { createMemo, createSignal, JSX, Show } from 'solid-js'
 import AvatarImg from '@/assets/img/avatar.png'
 import Avatar from '@/components/Common/Avatar/Avatar'
 import { destructure } from '@solid-primitives/destructure'

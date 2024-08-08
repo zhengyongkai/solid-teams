@@ -58,7 +58,8 @@ export default function ChatFile() {
       id: 3,
       name: 'Excel第一个',
       date: '13:50',
-      person: '郑永楷'
+      person: '郑永楷',
+      _disabled: true
     }
   ]
   return (

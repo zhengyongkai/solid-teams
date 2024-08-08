@@ -1,25 +1,25 @@
 import { destructure } from '@solid-primitives/destructure'
 import { createEffect, on, createSignal, createUniqueId } from 'solid-js'
 
-type changeEvent = Event & { currentTarget: HTMLInputElement; target: HTMLInputElement }
+import Style from './css/Checkbox.module.scss'
 
 interface CheckboxPropsInf {
   checked: boolean
-  onchange?: (e: changeEvent) => void
+  onchange?: (e: boolean) => void
   indeterminate?: boolean
-  classList?: string
   disabled?: boolean
+  classList?: string
 }
 
 export default function Checkbox(props: CheckboxPropsInf) {
   const {
     indeterminate = createSignal(false)[0],
-    classList = createSignal('')[0],
     checked,
     disabled = createSignal(false)[0]
   } = destructure(props)
   const { onchange } = props
   const id = createUniqueId()
+
   createEffect(
     on(
       () => indeterminate(),
@@ -32,19 +32,25 @@ export default function Checkbox(props: CheckboxPropsInf) {
     )
   )
 
+  const classList = () => ({
+    [Style['checkbox-checked']]: checked(),
+    [Style['checkbox-indeterminate']]: indeterminate(),
+    [Style['checkbox-disabled']]: props.disabled
+  })
+
   return (
-    <div>
-      <input
-        id={id}
-        disabled={disabled()}
-        class={`${classList()}`}
-        type="checkbox"
-        checked={checked()}
-        onchange={(e) => {
-          onchange ? onchange(e) : null
-        }}
-      />
-      <div></div>
+    <div
+      class={`cursor-pointer inline-flex items-center text-14 ${props.classList}`}
+      onclick={() => {
+        if (!disabled()) {
+          onchange?.(!checked())
+        }
+      }}
+    >
+      <input id={id} disabled={disabled()} class={` hidden`} type="checkbox" checked={checked()} />
+      <span class={`${Style['checkbox-outter']} `} classList={classList()}>
+        <span class={Style['checkbox-inner']}></span>
+      </span>
     </div>
   )
 }
