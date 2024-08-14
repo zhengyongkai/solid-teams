@@ -4,7 +4,7 @@ import SearchTitle from './SearchTitle'
 
 export default function SearchPanel() {
   return (
-    <div class="absolute top-34 w-468 bg-white rounded-4 shadow-16xl  py-5 z-2 ">
+    <div class="absolute top-34 w-468 bg-white rounded-4 shadow-16xl  py-5 z-5">
       <div class="px-16 pt-8 pb-12 flex gap-x-8 border-b-1 border-cns3">
         <Tag active={true}>文件</Tag>
         <Tag active={true}>群组聊天</Tag>
